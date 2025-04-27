@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Binary Tree Visualizer</title>
+
+    <!-- Custom disabled button style -->
+    <style>
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    </style>
+
+    <!-- Script -->
+    <script src="./script.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+    <!-- Tailwind CSS -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"> -->
+</head>
+
+<body class="min-h-screen flex flex-col justify-center bg-gray-50 font-sans">
+    <!-- Header -->
+    <header class="mb-auto p-5 text-center text-white bg-blue-500">
+        <h1 class="text-3xl font-bold">Binary Tree Visualizer</h1>
+    </header>
+
+    <!-- Main -->
+    <main class="container mx-auto p-5 flex flex-col">
+        <!-- Tree generation -->
+        <div class="mb-5 p-5 rounded shadow bg-white">
+            <p class="mb-2 text-sm">Enter your data:</p>
+
+            <div class="input-row">
+                <input id="data-input" class="p-2 flex-grow border border-gray-300 rounded" type="text" value="A,B,C,D,E,F,G,H,I,J,K,L,M,N,O">
+                <button class="px-4 py-2 text-white rounded bg-blue-500 hover:bg-blue-600 transition" onclick="generateTree()">Generate Tree</button>
+            </div>
+            
+
+            <p class="text-sm text-gray-300 mt-2">
+                (Comma separated, only the first 15 items will be used, and each node is limited to 2 characters)
+            </p>
+        </div>
+
+        <!-- Tree traversal -->
+        <div class="mb-5 flex justify-center space-x-5">
+            <button class="traversal-btn px-4 py-2 text-white rounded bg-green-500 hover:bg-green-600 transition" onclick="startTraversal('preorder')">Preorder</button>
+            <button class="traversal-btn px-4 py-2 text-white rounded bg-green-500 hover:bg-green-600 transition" onclick="startTraversal('inorder')">Inorder</button>
+            <button class="traversal-btn px-4 py-2 text-white rounded bg-green-500 hover:bg-green-600 transition" onclick="startTraversal('postorder')">Postorder</button>
+            <button class="traversal-btn px-4 py-2 text-white rounded bg-green-500 hover:bg-green-600 transition" onclick="startTraversal('levelorder')">Level-order</button>
+        </div>
+
+        <!-- Tree canvas -->
+        <div class="rounded shadow bg-white mb-8">
+            <canvas id="tree-canvas" class="mx-auto" height="400px"></canvas>
+        </div>
+
+        <!-- DSA Notes Section -->
+        <section class="bg-white shadow p-6 rounded">
+            <h2 class="text-2xl font-bold mb-4 text-purple-700"> Binary Trees</h2>
+
+            <h3 class="text-xl font-semibold mt-6 mb-2 text-black"> What is a Binary Tree?</h3>
+            <p class="text-gray-700 leading-relaxed mb-4">A binary tree is a hierarchical structure where each node has at most two children, known as the left and right child.</p>
+
+            <h3 class="text-xl font-semibold mt-6 mb-2 text-black"> Types of Binary Trees:</h3>
+            <ul class="list-disc ml-6 text-gray-700 leading-relaxed mb-4">
+                <li><strong>Full Binary Tree:</strong> Every node has 0 or 2 children.</li>
+                <li><strong>Perfect Binary Tree:</strong> All internal nodes have 2 children and all leaves are at the same level.</li>
+                <li><strong>Complete Binary Tree:</strong> All levels filled except possibly the last, filled left to right.</li>
+                <li><strong>Skewed Binary Tree:</strong> All nodes have only one child (left-skewed or right-skewed).</li>
+                <li><strong>Balanced Binary Tree:</strong> Height difference between left and right subtree is at most 1 for every node.</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold mt-6 mb-2 text-black"> Tree Traversals:</h3>
+            <ul class="list-disc ml-6 text-gray-700 leading-relaxed mb-4">
+                <li><strong>Inorder (Left, Root, Right):</strong> Used for BSTs to get sorted order.</li>
+                <li><strong>Preorder (Root, Left, Right):</strong> Used to copy the tree or serialize it.</li>
+                <li><strong>Postorder (Left, Right, Root):</strong> Useful for deleting or freeing the tree structure.</li>
+                <li><strong>Level-order (Breadth-first):</strong> Visits nodes level by level using a queue.</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold mt-6 mb-2 text-black"> Common Binary Tree Algorithms:</h3>
+            <ul class="list-disc ml-6 text-gray-700 leading-relaxed mb-4">
+                <li>Insert a node</li>
+                <li>Delete a node</li>
+                <li>Search a node</li>
+                <li>Find height/depth</li>
+                <li>Check if tree is balanced</li>
+                <li>Mirror a binary tree</li>
+                <li>Lowest Common Ancestor (LCA)</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold mt-6 mb-2 text-black"> Applications:</h3>
+            <ul class="list-disc ml-6 text-gray-700 leading-relaxed">
+                <li>Binary Search Trees (BST)</li>
+                <li>Expression Trees (used in compilers)</li>
+                <li>Heaps (priority queues)</li>
+                <li>Tries and Huffman Encoding Trees</li>
+                <li>File systems and hierarchical storage</li>
+            </ul>
+        </section>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Responsive Stack</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+   * {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff; /* white background */
+  font-family: "Orbitron", sans-serif;
+  color: #000000; /* black text */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  padding: 20px 10px;
+}
+
+h1 {
+  color: #c022cb;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  padding: 15px;
+}
+
+.mainContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .mainContent {
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+  }
+}
+
+#box {
+  height: 500px;
+  width: 90vw;
+  max-width: 600px;
+  padding: 20px;
+  border-radius: 20px;
+  border: 2px solid #c022cb;
+  background-color: #ffffff;
+  color: #000000;
+  overflow-y: auto;
+}
+
+input {
+  background-color: #ffffff;
+  border: 2px solid #c022cb;
+  color: #000000;
+  padding: 10px;
+  border-radius: 10px;
+  width: 100%;
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.btn-info,
+.btn-primary {
+  background-color: #c022cb;
+  border: none;
+  color: #ffffff;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 12px;
+  margin: 5px 0;
+  width: 100%;
+  max-width: 150px;
+  transition: 0.3s ease;
+}
+
+.btn-info:hover,
+.btn-primary:hover {
+  background-color: #a01aa8;
+  color: #ffffff;
+}
+
+.form-label {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #000000;
+}
+
+#message {
+  color: #000000;
+  font-size: 18px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.control-box {
+  width: 90vw;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.stack-info-container {
+  width: 100%;
+  max-width: 600px;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 30px;
+  /* text-align: center; */
+  border: 2px solid #c022cb;
+  color: #000000;
+}
+
+.stack-info-container h3 {
+  color: #c022cb;
+  margin-bottom: 10px;
+}
+
+.stack-info-container p,
+.stack-info-container ul {
+  color: #000000;
+  font-size: 1rem;
+}
+
+.stack-info-container li {
+  margin-bottom: 10px;
+}
+.stack-info-container strong {
+      color: purple;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- <div class="container">
+    <a class="btn btn-primary" href="index.html" role="button">👈 Back</a>
+  </div> -->
+
+  <h1 class="text-center">Stack</h1>
+
+  <div class="container mainContent">
+    <div style="width: 100%; max-width: 600px;">
+      <div id="box">
+        <!-- Stack visual will be rendered here -->
+      </div>
+    </div>
+
+    <div class="control-box">
+      <p>MAX size is 6</p>
+      <label for="text" class="form-label">Enter the element to push</label>
+      <input id="text" class="form-control" placeholder="Type value" />
+
+      <button id="push" type="button" class="btn btn-info">Push</button>
+      <button id="pop" type="button" class="btn btn-info">Pop</button>
+      <button id="peek" type="button" class="btn btn-info">Peek</button>
+
+      <h5>Message: <div id="message">Welcome</div></h5>
+    </div>
+  </div>
+
+  <!-- New Stack Info Container -->
+  <div class="stack-info-container">
+    <h3>About Stack Algorithm</h3>
+    <p>
+      A stack is a linear data structure that follows the LIFO (Last In, First Out) principle. 
+      The element added last will be removed first. It is commonly used to model real-world scenarios where 
+      elements are processed in reverse order.
+    </p>
+    <h4>Basic Operations</h4>
+    <ul>
+      <li><strong>Push</strong>: Adds an element to the top of the stack.</li>
+      <li><strong>Pop</strong>: Removes the element from the top of the stack.</li>
+      <li><strong>Peek</strong>: Returns the element at the top of the stack without removing it.</li>
+      <li><strong>Size</strong>: Returns the number of elements currently in the stack.</li>
+    </ul>
+    <h4>Types of Stacks</h4>
+    <ul>
+      <li><strong>Simple Stack</strong>: A basic LIFO stack where elements are added and removed from the top.</li>
+      <li><strong>Double-Ended Stack</strong>: A stack where elements can be added or removed from both ends.</li>
+    </ul>
+    <h4>Applications of Stack</h4>
+    <ul>
+      <li><strong>Undo Operation</strong>: Stacks are used in applications to implement the undo functionality, where the last action can be reversed.</li>
+      <li><strong>Function Call Stack</strong>: In programming, a stack is used to store function calls, so that they can be executed in reverse order when they are returned.</li>
+      <li><strong>Expression Evaluation</strong>: Stacks are used in evaluating mathematical expressions, especially in algorithms like postfix or prefix notation.</li>
+      <li><strong>Backtracking</strong>: Stacks are used in algorithms like depth-first search (DFS) for traversing graphs and solving puzzles.</li>
+    </ul>
+    <h4>Advantages of Using a Stack</h4>
+    <ul>
+      <li>Simple to implement with a very low overhead.</li>
+      <li>Helps in managing tasks that need to be processed in reverse order.</li>
+      <li>Efficient in handling function calls and managing memory in recursive programming.</li>
+    </ul>
+  </div>
+
+  <script src="script1.js"></script>
+</body>
+
+</html>

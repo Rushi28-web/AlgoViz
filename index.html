@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <title>AlgoViz</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   
+<link rel="icon" href="images\AV.png" type="image/png">
+
+<head>
+  <title>AlgoViz</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  
+    <!-- Link to CSS -->
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="about.css">
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <style>
+   
+    .hover-move {
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .hover-move:hover {
+      transform: translateX(20px);
+    }
+  </style>
+ <style>
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hero-section {
+            min-height: 100vh;
+            background-color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .floating-shape {
+            position: absolute;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        .shape-1 {
+            top: 17%;
+            left: 5%;
+            width: 100px;
+            height: 100px;
+            background: rgb(125, 30, 125);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+        .shape-2 {
+            bottom: 12%;
+            left: 30%;
+            width: 120px;
+            height: 120px;
+            background: rgb(84, 16, 84);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+        .shape-3 {
+            bottom: 58%;
+            right: 8%;
+            width: 150px;
+            height: 150px;
+            background: #3b143e;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            animation: float 4s ease-in-out infinite;
+        }
+        .shape-4 {
+            bottom: 8%;
+            right: 22%;
+            width: 350px;
+            height: 350px;
+            background: #6d0f74;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            animation: float 4s ease-in-out infinite;
+        }
+        .image-container {
+            perspective: 1000px;
+        }
+        .image-wrapper {
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.2s;
+        }
+        .image-inner {
+            animation: float 4s ease-in-out infinite;
+        }
+        .main-image {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .ripple-effect {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at var(--x) var(--y), rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 50%);
+            opacity: 0;
+            transition: opacity 0.2s;
+            pointer-events: none;
+        }
+        .image-wrapper:hover .ripple-effect {
+            opacity: 1;
+        }
+        .scroll-arrow {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            color: rgb(219, 127, 219);
+            animation: bounce 2s infinite;
+            cursor: pointer;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+            40% { transform: translateY(-20px) translateX(-50%); }
+            60% { transform: translateY(-10px) translateX(-50%); }
+        }
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+
+        #progress-container {
+            width: 100%;
+            height: 5px;
+            background-color: #f3f3f3; 
+            border-radius: 5px;
+            overflow: hidden; 
+            position: fixed;
+            top: 0;
+            left: 0; 
+            z-index: 9999; 
+        }
+
+        #progress-bar {
+            /* width: 0%; */
+            height: 100%;
+            background-color: rgb(219, 127, 219);
+        }
+        .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgb(199,22,199)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+.course {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.course:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+}
+
+.course img {
+  border-bottom: 2px solid #c022cb;
+  max-height: 200px;
+  object-fit: cover;
+}
+
+.course-inner-text {
+  background-color: #f8f8f8;
+  border-top: 1px solid #eee;
+  min-height: 180px;
+}
+
+.course-inner-text h3 a {
+  color: #c022cb;
+  font-size: 20px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.course-inner-text h3 a:hover {
+  color: #a018a3;
+}
+
+.course-inner-text p {
+  font-size: 15px;
+  color: #555;
+  margin-top: 10px;
+}
+
+
+    </style>
+</head>
+
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="72">
+
+  <div id="progress-container">
+    <div id="progress-bar"></div>
+  </div>
+
+  <script>
+let lastScrollPercentage = 0; // Keep track of the last scroll percentage
+
+function updateProgressBar() {
+    const scrollTop = window.scrollY; // Current scroll position
+    const windowHeight = document.documentElement.scrollHeight - window.innerHeight; // Total scrollable height
+    const scrollPercentage = (scrollTop / windowHeight) * 100; // Calculate scroll percentage
+
+    // Smoothly transition to the new percentage
+    const progressBar = document.getElementById('progress-bar');
+    
+    // Use a linear interpolation to gradually move towards the new percentage
+    lastScrollPercentage += (scrollPercentage - lastScrollPercentage) * 0.1; // Adjust the smoothing factor here
+    progressBar.style.width = lastScrollPercentage + '%'; // Update the progress bar width
+}
+
+// Listen for the scroll event
+window.addEventListener('scroll', updateProgressBar);
+
+  </script>
+
+
+  <div id="Loader"></div>
+
+  <div class="site-wrap">
+
+    <div class="site-mobile-menu site-navbar-target">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-close2 js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div>
+
+
+
+
+    <nav class="navbar navbar-expand-lg fixed-top bg-white">
+      <div class="container-fluid">
+        <div class="flex items-center">
+          <img src="" class="h-6 mr-2" alt="">
+          <a class="navbar-brand" style="font-weight: 900; color: rgb(165, 17, 165); padding-left: 10px; text-decoration: none;" >AlgoViz</a>
+        </div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+</button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav" >
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item dropdown" >
+              <a class="nav-link dropdown-toggle font-medium" href="#program-section" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="text-decoration: none;">
+                Static Visualizer
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="./Algorithm/Bubble.html">Bubble Sort</a></li>
+                <li><a class="dropdown-item" href="./Algorithm/Selectionsort.html">Selection Sort</a></li>
+                <li><a class="dropdown-item" href="./Algorithm/Insertionsort.html">Insertion Sort</a></li>
+                <li><a class="dropdown-item" href="./Algorithm/CombSort.html">Comb Sort</a></li>
+                <li><a class="dropdown-item" href="./Algorithm/Mergesort.html">Merge Sort</a></li>
+                <li><a class="dropdown-item" href="./Algorithm/Heapsort.html">Heap Sort</a></li>
+                <li><a class="dropdown-item" href="./Algorithm/Quicksort.html">Quick Sort</a></li>
+                <!-- <li><a class="dropdown-item" href="counting.html">Counting Sort</a></li> -->
+                <li><a class="dropdown-item" href="./Algorithm/Radixsort.html">Radix Sort</a></li>
+              </ul>
+              <li class="nav-item">
+                <a class="nav-link" style="font-weight: 500;text-decoration: none;" href="Compare.html" id="sort-visualizer-link" >Compare Sorting</a>
+              </li>
+            </li>
+            <li class="nav-item dropdown" >
+              <a class="nav-link dropdown-toggle font-medium" href="#program-section" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="text-decoration: none;">
+              Dynamic Visualizer
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="./Stack-Queue-Visualizer-main\stack.html">Stack</a></li>
+                <li><a class="dropdown-item" href="./Stack-Queue-Visualizer-main\queue.html">Queue</a></li>
+                <li><a class="dropdown-item" href="./Stack-Queue-Visualizer-main\linkedlist.html">Linked List</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link px-3" style="font-weight: 500;text-decoration: none; " href="Binary-Tree-Visualizer-main\index.html" id="contact-link">Binary Tree</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link px-3" style="font-weight: 500; text-decoration: none;" href="Graph-Visualizer-main\index.html" id="contact-link">Graph Visualizer</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" style="font-weight: 500;text-decoration: none;" href="#About-Us" id="about-link">About </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+ 
+
+      <section id="home-section" class="hero-section flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8">
+        <div class="floating-shape shape-1"></div>
+        <div class="floating-shape shape-2"></div>
+        <div class="floating-shape shape-3"></div>
+        <div class="floating-shape shape-4"></div>
+
+        <div class="container mx-auto flex flex-col md:flex-row items-center justify-between">
+            <div class="md:w-1/2 mb-10 md:mb-0 z-10">
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 animate-fade-in-up">
+                   <span style="color: #c022cb;">Real-Time<br></span>Algorithm Visualization
+                    <span class="whitespace-nowrap">and Learning</span>
+                </h1>
+                <p class="text-lg sm:text-xl text-gray-700 mb-8 animate-fade-in-up delay-100">
+                  "Explore fundamental data structures like Stack, Queue, Linked List, Graph, and Binary Tree through an interactive visualization tool. Master their operations and concepts with ease."
+                </p>
+                <div class="flex flex-wrap gap-4 animate-fade-in-up delay-200">
+                    <a href="visual.html" class=" text-white px-6 py-3 rounded-full font-semibold hover:bg-purple-600 transition duration-300" style="background-color: #c84fd1;text-decoration: none;">
+                        Sorting Lab
+                    </a>
+                    <a href="#programs-section" class="bg-gray-200 text-gray-800 px-6 py-3 rounded-full font-semibold hover:bg-gray-300 transition duration-300" style="text-decoration: none;">
+                        Explore
+                    </a>
+                </div>
+            </div>
+            <div class="md:w-1/2 image-container animate-fade-in-up delay-300">
+                <div class="image-wrapper">
+                    <div class="image-inner">
+                        <img src="images\Binary code-amico.svg" alt="Sorting Visualization" class="main-image">
+                        <div class="ripple-effect"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-arrow">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+<div class="site-section algorithm-title algorithm-section" id="algorithm-section">
+      <div class="container">
+        <div class="row mb-5 justify-content-center">
+          <div class="col-lg-7 text-center" data-aos="fade-up" data-aos-delay="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="site-section courses-entry-wrap" data-aos="fade-up" data-aos-delay="100">
+      <div class="swiper mySwiper container">
+        <h2 class="section-title text-center mt-5 pt-5" style="font-size: 60px;"><b>Sorting Visualizers</b></h2>
+        <p class="text-center">Following are the visual representations for sorting algorithms showing how they work and their functionalities.</p>
+        <div class="row">
+         
+
+          <div class="owl-carousel col-12 nonloop-block-14">
+
+            <div class="course bg-white h-100 align-self-stretch">
+              <figure class="m-0">
+                <a href="visual.html"><img src="images\bubble sort.jpg" i alt="Image" class="img-fluid"></a>
+              </figure>
+              <div class="course-inner-text py-4 px-4">
+                <h3><a href="visual.html" style="color: purple; font-size: 20;">Bubble Sort</a></h3>
+                <p>Bubble sort algorithm is the simplest sorting algorithm that runs through the list repeatedly, 
+                  compares adjacent elements, and swaps them if they are out of order.  </p>
+                </div>
+            </div>
+            <div class="course bg-white h-100 align-self-stretch">
+              <figure class="m-0 custom-figure">
+                <a href="visual.html">
+                  <img src="images\radix.jpg" alt="Image" class="img-fluid">
+                </a>
+              </figure>
+              <div class="course-inner-text py-4 px-4">
+                <h3><a href="visual.html"style="color: purple; font-size: 20;">Radix Sort</a></h3>
+                <p>Radix Sort is a non-comparative sorting algorithm that sorts numbers by processing individual digits. Radix Sort can handle large numbers of elements efficiently when the number of digits</p>
+              </div>
+            </div>
+            <div class="course bg-white h-100 align-self-stretch">
+              <figure class="m-0">
+                <a href="visual.html"><img src="images\merge sort.png" alt="Image" class="img-fluid"></a>
+              </figure>
+              <div class="course-inner-text py-4 px-4">
+                <h3><a href="visual.html"style="color: purple; font-size: 20;">Merge Sort</a></h3>
+                <p>It is similar to the quick sort algorithm as it uses the divide and conquer approach for sorting. It is one of the most popular and efficient sorting algorithm.</p>
+              </div>
+            </div>
+
+            <div class="course bg-white h-100 align-self-stretch">
+              <figure class="m-0">
+                <a href="visual.html"><img src="images\COMBO SORT.png" alt="Image" class="img-fluid"></a>
+              </figure>
+              <div class="course-inner-text py-4 px-4">
+                <h3><a href="visual.html"style="color: purple; font-size: 20;">Comb Sort</a></h3>
+                <p>Comb sort improves on bubble sort by eliminating turtles, or small values near the end of the list, since it uses a larger gap. This results in a faster and more efficient sorting process.</p>
+              </div>
+            </div>
+
+            <div class="course bg-white h-100 align-self-stretch">
+              <figure class="m-0">
+                <a href="visual.html"><img src="images\SELECTION SORT.png" alt="Image" class="img-fluid"></a>
+              </figure>
+              <div class="course-inner-text py-4 px-4">
+
+                <h3><a href="visual.html"style="color: purple; font-size: 20;">Selection Sort</a></h3>
+                <p>Selection sort is a sorting algorithm that selects the smallest element from an unsorted list in each iteration and places that 
+                  element at the beginning of the unsorted list.</p>
+              </div>
+            </div>
+
+            <div class="course bg-white h-100 align-self-stretch">
+              <figure class="m-0">
+                <a href="visual.html"><img src="images\INSERTION SORT.png" alt="Image" class="img-fluid"></a>
+              </figure>
+              <div class="course-inner-text py-4 px-4">
+                <h3><a href="visual.html"style="color: purple; font-size: 20;">Insertion Sort</a></h3>
+                <p>Insertion sort is a sorting algorithm that places an unsorted element at its suitable place in each iteration.
+                  Insertion sort works similarly as we sort cards in our hand in a cards. </p>
+              </div>
+            </div>
+            <div class="course bg-white h-100 align-self-stretch">
+              <figure class="m-0">
+                <a href="visual.html"><img src="images\QUICK SORT.png"alt="Image" class="img-fluid"></a>
+              </figure>
+              <div class="course-inner-text py-4 px-4">
+                <h3><a href="visual.html"style="color: purple; font-size: 20;">Quick Sort</a></h3>
+                <p>Quick sort is an efficient , comparison-based sorting  that uses a divide-and-conquer approach by partitioning elements around a pivot.</p>
+              </div>
+            </div>
+            <div class="course bg-white h-100 align-self-stretch">
+              <figure class="m-0">
+                <a href="visual.html"><img src="images\HEAP SORT.png"alt="Image" class="img-fluid"></a>
+              </figure>
+              <div class="course-inner-text py-4 px-4">
+                <h3><a href="visual.html"style="color: purple; font-size: 20;">Heap Sort</a></h3>
+                <p>Heap sort is a comparison-based sorting algorithm that builds a max heap from the input data and repeatedly extracts the maximum element to sort the array.
+              </div>
+            </div>
+            
+            <div class="course bg-white h-100 align-self-stretch">
+              <figure class="m-0">
+                <a href="Compare.html"><img src="images\CPMARISON.png" alt="Image" class="img-fluid"></a>
+              </figure>
+              <div class="course-inner-text py-4 px-4">
+                <h3><a href="Compare.html"style="color: purple; font-size: 20;">Compare Algorithms</a></h3>
+                <p>Comparing sorting methods involves evaluating their efficiency and suitability for different data sizes.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="swiper-button-next customNextBtn btn m-1"></div>
+      <div class="swiper-button-prev customPrevBtn btn m-1"></div>
+      <div class="swiper-pagination"></div> -->
+    </div>
+  </div>
+
+
+<section class="site-section" id="programs-section">
+    <div class="container">
+      <div class="row mb-5 justify-content-center">
+        <div class="col-lg-7 text-center" data-aos="fade-up" data-aos-delay="">
+          <h2 class="section-title" style="font-size: 60px;"><b>Algorithms</b></h2>
+          <p>An algorithm is a procedure used for solving a problem or performing a computation.
+            Algorithms act as an exact list of instructions that conduct specified actions step by step in either
+            hardware- or software-based routines. </p>
+        </div>
+      </div>
+      <div class="row mb-5 align-items-center">
+        <div class="col-lg-7 mb-5 order-1 order-lg-2" data-aos="fade-up" data-aos-delay="100" id="Comb-Sort"  >
+          <img src="images/bubble2.gif" alt="Image" class="img-fluid">
+        </div>
+        <div class="col-lg-4 mr-auto order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200" >
+          <h2 class="text-black mb-4"><b>Comb Sort</b></h2>
+          <p class="mb-4">comb(A, p, r): <br>
+            &nbsp; &nbsp; &nbsp; if p > r <br>
+            &nbsp; &nbsp; &nbsp; &nbsp; return <br>
+            &nbsp; &nbsp; &nbsp; q = (p+r)/2 <br>
+            &nbsp; &nbsp; &nbsp; mergeSort(A, p, q) <br>
+            &nbsp; &nbsp; &nbsp; mergeSort(A, q+1, r) <br>
+            &nbsp; &nbsp; &nbsp; merge(A, p, q, r)</p>
+        </div>
+      </div>
+
+      <div class="row mb-5 align-items-center mt-16">
+        <div class="col-lg-7 mb-5" data-aos="fade-up" data-aos-delay="100" id="Bubble-Sort">
+          <img src="images/merge2.gif" alt="Image" class="img-fluid">
+        </div>
+        <div class="col-lg-4 ml-auto" data-aos="fade-up" data-aos-delay="200">
+          <h2 class="text-black mb-4"><b>Bubble Sort</b></h2>
+          <p class="mb-4">begin BubbleSort(arr) <br>
+            &nbsp; &nbsp;for all array elements <br>
+            &nbsp; &nbsp; &nbsp; &nbsp; if arr[i] > arr[i+1] <br>
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; swap(arr[i], arr[i+1]) <br>
+            &nbsp; &nbsp; &nbsp; &nbsp; end if <br>
+            &nbsp; &nbsp;end for <br>
+            &nbsp; &nbsp;return arr <br>
+            end BubbleSort </p>
+        </div>
+      </div>
+
+      <div class="row mb-5 align-items-center">
+        <div class="col-lg-7 mb-5 order-1 order-lg-2" data-aos="fade-up" data-aos-delay="100" id="Merge-Sort">
+          <img src="images/bubble2.gif" alt="Image" class="img-fluid">
+        </div>
+        <div class="col-lg-4 mr-auto order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
+          <h2 class="text-black mb-4"><b>Merge Sort</b></h2>
+          <p class="mb-4">MergeSort(A, p, r): <br>
+            &nbsp; &nbsp; &nbsp; if p > r <br>
+            &nbsp; &nbsp; &nbsp; &nbsp; return <br>
+            &nbsp; &nbsp; &nbsp; q = (p+r)/2 <br>
+            &nbsp; &nbsp; &nbsp; mergeSort(A, p, q) <br>
+            &nbsp; &nbsp; &nbsp; mergeSort(A, q+1, r) <br>
+            &nbsp; &nbsp; &nbsp; merge(A, p, q, r)</p>
+        </div>
+      </div>
+
+      <div class="row mb-5 align-items-center">
+        <div class="col-lg-7 mb-5" data-aos="fade-up" data-aos-delay="100" id="Insertion-Sort">
+          <img src="images/insertion2.gif" alt="Image" class="img-fluid">
+        </div>
+        <div class="col-lg-4 ml-auto" data-aos="fade-up" data-aos-delay="200">
+          <h2 class="text-black mb-4"><b>Insertion Sort</b></h2>
+          <p class="mb-4">insertionSort(array) <br>
+            &nbsp; &nbsp; mark first element as sorted <br>
+            &nbsp; &nbsp; for each unsorted element X <br>
+            &nbsp; &nbsp; &nbsp; &nbsp;'extract' the element X <br>
+            &nbsp; &nbsp;for j <- lastSortedIndex down to 0 <br>
+              &nbsp; &nbsp; &nbsp; &nbsp; if current element j > X <br>
+              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;move sorted element to the right by 1 <br>
+              &nbsp; &nbsp; break loop and insert X here <br>
+              end insertionSort <br>
+          </p>
+        </div>
+      </div>
+
+
+      <div class="row mb-5 align-items-center">
+        <div class="col-lg-7 mb-5 order-1 order-lg-2" data-aos="fade-up" data-aos-delay="100" id="Selection-Sort">
+          <img src="images/selection2.gif" alt="Image" class="img-fluid">
+        </div>
+        <div class="col-lg-4 mr-auto order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
+          <h2 class="text-black mb-4"><b>Selection Sort</b></h2>
+          <p class="mb-4">selectionSort(array, size) <br>
+            &nbsp; &nbsp; repeat (size - 1) times <br>
+            &nbsp; &nbsp; set the first unsorted element as the <br> &nbsp; &nbsp; minimum <br>
+            &nbsp; &nbsp; for each of the unsorted elements <br>
+            &nbsp; &nbsp; &nbsp; &nbsp; if element < currentMinimum <br>
+              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;set element as new minimum <br>
+              &nbsp; &nbsp; swap minimum with first unsorted <br> &nbsp; &nbsp; position <br>
+              end selectionSort </p>
+        </div>
+      </div>
+      <div class="row mb-5 align-items-center">
+        <div class="col-lg-7 mb-5" data-aos="fade-up" data-aos-delay="100" id="Heapsort(A)">
+            <img src="images/heap-sort.gif" alt="Image" class="img-fluid">
+        </div>
+        <div class="col-lg-4 ml-auto" data-aos="fade-up" data-aos-delay="200">
+            <h2 class="text-black mb-4"><b>Heap Sort </b></h2>
+            <p class="mb-4">Heapsort(A) <br>
+                &nbsp; &nbsp; BUILD-MAX-HEAP(A) <br>
+                &nbsp; &nbsp; for i = A.length downto 2 <br>
+                &nbsp; &nbsp; &nbsp; &nbsp;exchange A[1] with A[i] <br>
+                &nbsp; &nbsp;A.heap-size = A.heap-size - 1 <br>
+                &nbsp; &nbsp; &nbsp; &nbsp; MAX-HEAPIFY(A, 1) <br>
+            </p>
+        </div>
+    </div>
+    
+    <div class="row mb-5 align-items-center">
+      <div class="col-lg-7 mb-5 order-1 order-lg-2" data-aos="fade-up" data-aos-delay="100" id="QUICKSORT">
+        <img src="images/quick2.gif" alt="Image" class="img-fluid">
+      </div>
+      <div class="col-lg-4 mr-auto order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
+        <h2 class="text-black mb-4"><b>Quick Sort</b></h2>
+        <p class="mb-4">QUICKSORT (array A, start, end)<br>
+          &nbsp; &nbsp; if (start < end)    <br>
+          &nbsp; &nbsp;  p = partition(A, start, end)   <br> &nbsp; &nbsp; minimum <br>
+          &nbsp; &nbsp; QUICKSORT (A, start, p - 1)     <br>
+          &nbsp; &nbsp; &nbsp; &nbsp; QUICKSORT (A, p + 1, end) <br>
+          
+      </div>
+    </div>
+    <div class="row mb-5 align-items-center">
+      <div class="col-lg-7 mb-5" data-aos="fade-up" data-aos-delay="100" id="Heapsort(A)">
+          <img src="images/radixxx.gif" alt="Image" class="img-fluid">
+      </div>
+      <div class="col-lg-4 ml-auto" data-aos="fade-up" data-aos-delay="200">
+          <h2 class="text-black mb-4"><b>Radix Sort </b></h2>
+          <p class="mb-4">RADIXSORT (array A, d)<br>
+            &nbsp; &nbsp; for i = 1 to d <br>
+            &nbsp; &nbsp; &nbsp; &nbsp; A = COUNTINGSORT(A, i) <br>
+        </p>
+      </div>
+  </div>
+<section class="mb-10 mt-40 bg-white" id="features-section">
+      <div class="py-12" data-aos="fade-up" data-aos-delay="200">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div class="lg:text-center">
+                  <h1
+                      class="text-3xl md:text-4xl lg:text-5xl xl:text-6xl mb-30 font-bold text-center mb-30 md:mb-12 text-black">
+                      Features</h1>
+              </div>
+              <div class="mt-32">
+                  <dl class="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
+                      <div
+                          class="relative opacity-80 hover:opacity-100 hover:cursor-pointer hover:scale-105">
+                          <dt>
+                              <div
+                                  class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-primary-500 text-white transform transition duration-500 hover:scale-110">
+                                  <img src="./images/think-svgrepo-com.svg">
+                              </div>
+                              <p class="font-heading ml-16 text-lg leading-6 font-bold text-blue-700">
+                                Interactive visualizations</p>
+                          </dt>
+                          <dd class="mt-2 ml-16 text-base text-black">Visual Sort provides interactive visualizations that let you see sorting algorithms in action. Watch how the elements move and get sorted step-by-step.
+
+                              </dd>
+                      </div>
+                      <div
+                          class="relative opacity-80 hover:opacity-100 hover:cursor-pointer hover:scale-105">
+                          <dt class="text-white">
+                              <div
+                                  class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-primary-500 text-white transform transition duration-500 hover:scale-110">
+                                 
+                                  <img src="./images/multiple-sorting-algo.svg">
+                              </div>
+                              <p class="font-heading ml-16 text-lg leading-6 font-bold text-gray-900"style="color: blue;">
+                                Dynamic Data Structure Visualization</p>
+                          </dt>
+                          <dd class="mt-2 ml-16 text-base text-black">Understand the inner workings of essential data structures such as Stack, Queue, and Linked List through interactive, real-time animations that show how data is added, removed, and manipulated step-by-step.
+                          </dd>
+                      </div>
+                      <div
+                          class="relative opacity-80 hover:opacity-100 hover:cursor-pointer hover:scale-105">
+                          <dt>
+                              <div
+                                  class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-primary-500 text-white transform transition duration-500 hover:scale-110">
+                                  <img src="./images/custom-input.svg">
+                              </div>
+                              <p class="font-heading ml-16 text-lg leading-6 font-bold text-blue-700">
+                                Custom Input Data</p>
+                          </dt>
+                          <dd class="mt-2 ml-16 text-base text-black">Input your own data sets to see how different algorithms sort them. This feature helps you understand the performance and behavior of sorting algorithms on various data sets.</dd>
+                      </div>
+                      <div
+                          class="relative opacity-80 hover:opacity-100 hover:cursor-pointer hover:scale-105">
+                          <dt>
+                              <div
+                                  class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-primary-500 text-white transform transition duration-500 hover:scale-110">
+                                  <img src="./images/speed-svgrepo-com.svg">
+                              </div>
+                              <p class="font-heading ml-16 text-lg leading-6 font-bold text-blue-700">
+                                  Animation Speed Control</p>
+                          </dt>
+                          <dd class="mt-2 ml-16 text-base text-black">Adjust the speed of the sorting animations to your liking. Slow down the process to see each step clearly or speed it up to quickly get results.</dd>
+                      </div>
+                  </dl>
+                  <dl class="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10" style="margin-top: 2.5rem;">
+                    <div
+                        class="relative opacity-80 hover:opacity-100 hover:cursor-pointer hover:scale-105">
+                        <dt>
+                            <div
+                                class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-primary-500 text-white transform transition duration-500 hover:scale-110">
+                                <img src="./images/stairs-svgrepo-com.svg">
+                            </div>
+                            <p class="font-heading ml-16 text-lg leading-6 font-bold text-blue-700">
+                              Step-by-Step Execution</p>
+                        </dt>
+                        <dd class="mt-2 ml-16 text-base text-black">Execute sorting algorithms one step at a time to closely examine each operation. This feature is great for learning and teaching purposes.
+                            </dd>
+                    </div>
+                    <div
+                        class="relative opacity-80 hover:opacity-100 hover:cursor-pointer hover:scale-105">
+                        <dt class="text-white">
+                            <div
+                                class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-primary-500 text-white transform transition duration-500 hover:scale-110">
+                                <img src="./images/performance.svg">
+                            </div>
+                            <p class="font-heading ml-16 text-lg leading-6 font-bold text-gray-900" style="color: blue;">
+                              Performance Metrics</p>
+                        </dt>
+                        <dd class="mt-2 ml-16 text-base text-black">See detailed performance metrics for each sorting algorithm, including execution time and the number of operations performed. Compare the efficiency of different algorithms.</dd>
+                    </div>
+                    <div
+                        class="relative opacity-80 hover:opacity-100 hover:cursor-pointer hover:scale-105">
+                        <dt>
+                            <div
+                                class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-primary-500 text-white transform transition duration-500 hover:scale-110">
+                                <img src="./images/comparison.svg">
+                            </div>
+                            <p class="font-heading ml-16 text-lg leading-6 font-bold text-blue-700">
+                             Comparison Mode</p>
+                        </dt>
+                        <dd class="mt-2 ml-16 text-base text-black">Compare two sorting algorithms side-by-side. See how each algorithm handles the same data set and compare their performance visually.</dd>
+                    </div>
+                    <div
+                        class="relative opacity-80 hover:opacity-100 hover:cursor-pointer hover:scale-105">
+                        <dt>
+                            <div
+                                class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-primary-500 text-white transform transition duration-500 hover:scale-110">
+                                <img src="./images/responsive.svg">
+                            </div>
+                            <p class="font-heading ml-16 text-lg leading-6 font-bold text-blue-700">
+                                Responsive Design</p>
+                        </dt>
+                        <dd class="mt-2 ml-16 text-base text-black">Our tool is designed to work seamlessly on any device, whether it's a desktop, tablet, or mobile phone. Enjoy a consistent and accessible user experience everywhere.</dd>
+                    </div>
+                </dl>
+              </div>
+              
+          </div>
+      </div>
+</section>
+<div>
+  <main>
+<section class="main" id="About-Us" >
+                    <div class="card" data-aos="fade-up" data-aos-delay="200" style="height: 800px;">
+                    <h1> ABOUT PROJECT</h1>
+                        <img class="img" src="images\Innovation-amico.png" alt="" style="height: 350px; width: 350px; ;">
+                    <p class="text-base md:text-lg lg:text-2xl text-gray-400 text-center"><b>AlgoViz: Real-Time Algorithm Visualization and Learning</b> platform built to simplify the understanding of complex data structures and algorithms. Designed especially for students and aspiring developers, it offers dynamic visualizations, step-by-step code execution, time complexity analysis, and problem-solving sections. From sorting algorithms to binary trees and graph traversal, AlgoViz provides a hands-on experience that enhances learning, encourages experimentation, and makes mastering algorithms both engaging and effective.</p>
+                    </div>
+                </section>
+            </div>
+
+            <div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+            </div>
+        </div>
+    </main>
+    </div> <!-- .site-wrap -->
+
+    <script src="js/main.js"></script>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+      var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 3,
+        spaceBetween: 30,
+        slidesPerGroup: 3,
+        loop: true,
+        loopFillGroupWithBlank: true,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      });
+    </script>
+        <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+      
+        <script src="main.js"></script>
+
+<!--&copy;<script>document.write(new Date().getFullYear());</script-->
+ 
+  
+  
+  
+</div> <!-- .site-wrap -->
+
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/jquery-migrate-3.0.1.min.js"></script>
+<script src="js/jquery-ui.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/jquery.stellar.min.js"></script>
+<script src="js/jquery.countdown.min.js"></script>
+<script src="js/bootstrap-datepicker.min.js"></script>
+<script src="js/jquery.easing.1.3.js"></script>
+<script src="js/aos.js"></script>
+<script src="js/jquery.fancybox.min.js"></script>
+<script src="js/jquery.sticky.js"></script>
+<script src="js/main.js"></script>
+
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
+<!-- Initialize Swiper -->
+<script>
+
+
+  var swiper = new Swiper(".mySwiper", {
+    slidesPerView: 3,
+    spaceBetween: 30,
+    slidesPerGroup: 3,
+    loop: true,
+    loopFillGroupWithBlank: true,
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+  });
+</script>
+
+  <script>
+  var loader = document.getElementById("Loader");
+  window.addEventListener("load", function(){
+    loader.style.display = "none";
+  })
+</script>
+
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script src="main.js"></script>
+<!--landing page script-->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const imageWrapper = document.querySelector('.image-wrapper');
+  const rippleEffect = document.querySelector('.ripple-effect');
+
+  imageWrapper.addEventListener('mousemove', (e) => {
+    const rect = imageWrapper.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const xRotation = (y - rect.height / 2) / 10;
+    const yRotation = (x - rect.width / 2) / -10;
+
+    requestAnimationFrame(() => {
+      imageWrapper.style.transform = `rotateX(${xRotation}deg) rotateY(${yRotation}deg)`;
+      rippleEffect.style.setProperty('--x', `${x}px`);
+      rippleEffect.style.setProperty('--y', `${y}px`);
+    });
+  });
+
+  imageWrapper.addEventListener('mouseleave', () => {
+    imageWrapper.style.transform = 'rotateX(0) rotateY(0)';
+  });
+});
+
+window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.querySelector('.intro-section').classList.add('fade-in');
+            }, 100); // Slight delay to ensure smooth transition after preloader
+        });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const topButton = document.getElementById("topbtn");
+    const arrow = document.querySelector('.scroll-arrow');
+    const heroSection = document.getElementById('home-section');
+    
+    let lastKnownScrollPosition = 0;
+    let ticking = false;
+
+    // Function to update active link based on scroll position
+    function updateActiveLink(scrollPos) {
+      let index = sections.length;
+
+      // Adjust offset for navbar height if necessary
+      const offset = 100; // Adjust this based on your navbar height
+
+      while (--index && scrollPos + offset < sections[index].offsetTop) {}
+
+      // Remove active class from all links
+      navLinks.forEach((link) => link.classList.remove('active'));
+
+      // Add active class to the current link
+      if (navLinks[index]) navLinks[index].classList.add('active');
+    }
+
+    // Handle scroll events
+    function handleScroll() {
+      lastKnownScrollPosition = window.scrollY;
+
+      // Show or hide back-to-top button
+      if (lastKnownScrollPosition > 100) {
+        topButton.style.display = "block";
+      } else {
+        topButton.style.display = "none";
+      }
+
+      // Hide the scroll arrow based on the position of the hero section
+      const heroBottom = heroSection.getBoundingClientRect().bottom;
+      arrow.style.opacity = (lastKnownScrollPosition > 200 || heroBottom < 0) ? '0' : '1';
+
+      // Update active link
+      if (!ticking) {
+        window.requestAnimationFrame(function () {
+          updateActiveLink(lastKnownScrollPosition);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }
+
+    // Scroll event listener
+    window.addEventListener('scroll', handleScroll);
+
+    // Back-to-top button click event
+    topButton.onclick = function (event) {
+      event.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    };
+
+    // Initial call to set active link state
+    updateActiveLink(window.scrollY);
+  });
+</script>
+
+
+
+
+
+
+</body>
+
+</html>

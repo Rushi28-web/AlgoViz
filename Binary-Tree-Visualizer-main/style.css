@@ -1,0 +1,191 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap'); */
+
+* {
+    box-sizing: border-box;
+    font-family: 'Orbitron', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #ffffff; /* Light background */
+    color: #000000; /* Black text */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Header */
+header {
+    width: 100%;
+    background: linear-gradient(90deg, #f5e1f9, #fcd6ff); /* Very soft purple gradient */
+    box-shadow: 0 0 25px #f5e1f9;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #c036c2;
+    /* text-shadow: 0 0 4px #c716c7; */
+}
+
+/* Main layout */
+main {
+    width: 100%;
+    max-width: 900px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Input section */
+.bg-white {
+    background-color: #ffffff;
+    border: 2px solid #c716c7;
+    border-radius: 10px;
+    padding: 1.5rem;
+    width: 100%;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 0 10px #f2ccf2;
+    line-height: 1.6;
+    font-size: 1rem;
+    color: #000000;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+}
+
+input[type="text"] {
+    padding: 0.75rem;
+    background-color: #f8e9fb;
+    color: #000000;
+    border: 1px solid #c716c7;
+    border-radius: 8px;
+    width: 100%;
+    font-size: 1rem;
+}
+
+input[type="text"]::placeholder {
+    color: #c716c7;
+}
+
+/* Buttons */
+button {
+    padding: 0.75rem 1.5rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    background-color: #c716c7;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 12px #f5d4f5;
+}
+
+button:hover {
+    background-color: #a512a5;
+    box-shadow: 0 0 18px #ecb8ec;
+}
+
+button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* Traversal buttons */
+.button-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.traversal-btn {
+    min-width: 120px;
+}
+
+/* Canvas */
+.canvas-container {
+    width: 60%;
+    padding: 1rem;
+    background-color: #ffffff;
+    border: 2px solid #c716c7;
+    border-radius: 12px;
+    box-shadow: 0 0 15px #f2ccf2;
+}
+
+canvas {
+    display: block;
+    margin: 0 auto;
+    width: 60%;
+    max-width: 800px;
+    background-color: #fff5fc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #f5d4f5;
+}
+
+/* Text info */
+.text-sm {
+    font-size: 1rem;
+    color: #333333;
+    margin-top: 0.5rem;
+    line-height: 1.6;
+}
+
+/* Headings for DSA notes */
+h2 {
+    font-size: 1.8rem;
+    color: #c716c7;
+    margin-bottom: 1rem;
+}
+
+strong {
+    color: #c716c7;
+}
+.input-row {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+    width: 100%;
+}
+
+/* Responsive: Stack on smaller screens */
+@media (max-width: 600px) {
+    .input-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .input-row button {
+        width: 100%;
+    }
+}
+
+
+/* Mobile responsiveness */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    .traversal-btn {
+        width: 100%;
+    }
+
+    .flex-col {
+        gap: 0.75rem;
+    }
+
+    canvas {
+        width: 100%;
+    }
+}
